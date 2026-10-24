@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f7f8;
+  --background-elevated: rgba(255, 255, 255, 0.72);
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --accent: #0f766e;
+  --accent-soft: rgba(15, 118, 110, 0.12);
+  --border: rgba(15, 23, 42, 0.1);
+  --lattice: rgba(15, 118, 110, 0.08);
+  --lattice-strong: rgba(15, 118, 110, 0.16);
+  --glow: rgba(14, 116, 144, 0.18);
+  --nav-bg: rgba(244, 247, 248, 0.82);
+  --timeline: #cbd5e1;
+  --chip: rgba(15, 23, 42, 0.04);
+  --shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+}
+
+.dark {
+  --background: #0b0f14;
+  --background-elevated: rgba(17, 24, 33, 0.72);
+  --foreground: #e8eef4;
+  --muted: #94a3b8;
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.12);
+  --border: rgba(232, 238, 244, 0.1);
+  --lattice: rgba(45, 212, 191, 0.06);
+  --lattice-strong: rgba(45, 212, 191, 0.14);
+  --glow: rgba(45, 212, 191, 0.12);
+  --nav-bg: rgba(11, 15, 20, 0.84);
+  --timeline: #334155;
+  --chip: rgba(232, 238, 244, 0.05);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-border: var(--border);
+  --font-sans: var(--font-plex-sans);
+  --font-display: var(--font-syne);
+  --font-mono: var(--font-plex-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-plex-sans), system-ui, sans-serif;
+  transition:
+    background-color 0.45s ease,
+    color 0.45s ease;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--foreground);
+}
+
+.font-display {
+  font-family: var(--font-syne), var(--font-plex-sans), system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+.surface-mist {
+  background:
+    radial-gradient(1200px 600px at 12% -10%, var(--glow), transparent 55%),
+    radial-gradient(900px 500px at 88% 8%, var(--accent-soft), transparent 50%),
+    var(--background);
+}
+
+.section-pad {
+  @apply px-5 sm:px-8 lg:px-12;
+}
+
+.container-shell {
+  @apply mx-auto w-full max-w-6xl;
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size 0.35s ease;
+}
+
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1.5px;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition;
+  background: var(--accent);
+  color: #041016;
+  box-shadow: var(--shadow);
+}
+
+.dark .btn-primary {
+  color: #042f2e;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  background: var(--background-elevated);
+  backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chip {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs;
+  background: var(--chip);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
