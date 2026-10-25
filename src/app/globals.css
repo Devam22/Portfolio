@@ -280,6 +280,18 @@ body {
   box-shadow: var(--shadow-strong);
 }
 
+.panel-static {
+  background: var(--background-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.panel-static:hover {
+  transform: none;
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
 .panel-strong {
   background: var(--background-elevated);
   border: 1px solid var(--border);

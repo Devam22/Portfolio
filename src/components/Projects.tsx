@@ -40,7 +40,7 @@ export function Projects({
         </div>
 
         {error ? (
-          <p className="panel mb-6 rounded-2xl px-4 py-4 text-sm text-[var(--muted)] sm:px-5">
+          <p className="panel-static mb-6 rounded-2xl px-4 py-4 text-sm text-[var(--muted)] sm:px-5">
             {error}
           </p>
         ) : null}

@@ -145,7 +145,7 @@ export const socialIcons = {
   email: { Icon: HiOutlineEnvelope, color: "#FF3D00", label: "Email" },
   phone: { Icon: HiOutlinePhone, color: "#00BFA6", label: "Phone" },
   linkedin: { Icon: FaLinkedin, color: "#0A66C2", label: "LinkedIn" },
-  github: { Icon: FaGithub, color: "#111827", label: "GitHub" },
+  github: { Icon: FaGithub, color: "#8B949E", label: "GitHub" },
   oracle: { Icon: FaDatabase, color: "#C74634", label: "Oracle" },
   accenture: { Icon: FaMicrosoft, color: "#A100FF", label: "Accenture" },
   education: {

@@ -83,9 +83,12 @@ export async function fetchAllRepos(): Promise<GitHubFetchResult> {
 
 export function formatRelativeDate(iso: string): string {
   const date = new Date(iso);
-  return date.toLocaleDateString("en-CA", {
+  if (Number.isNaN(date.getTime())) return "";
+
+  return new Intl.DateTimeFormat("en-CA", {
     year: "numeric",
     month: "short",
     day: "numeric",
-  });
+    timeZone: "UTC",
+  }).format(date);
 }

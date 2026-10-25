@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { profile } from "@/content/profile";
 import { SocialLinks } from "@/components/SocialLinks";
+import { handleSectionNav } from "@/lib/scroll";
 import { HiArrowDownTray } from "react-icons/hi2";
 
 export function Hero() {
@@ -109,7 +110,11 @@ export function Hero() {
                 <HiArrowDownTray className="h-4 w-4" />
                 {profile.cta.resume}
               </a>
-              <a href="#projects" className="btn-ghost">
+              <a
+                href="#projects"
+                className="btn-ghost"
+                onClick={(event) => handleSectionNav(event, "#projects")}
+              >
                 {profile.cta.work}
               </a>
             </div>

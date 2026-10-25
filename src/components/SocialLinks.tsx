@@ -47,7 +47,9 @@ export function SocialLinks({
             aria-label={meta.label}
             className={`social-btn ${size === "sm" ? "!h-9 !w-9" : ""}`}
             onMouseEnter={(event) => {
-              event.currentTarget.style.backgroundColor = meta.color;
+              const hoverColor =
+                link.key === "github" ? "#24292F" : meta.color;
+              event.currentTarget.style.backgroundColor = hoverColor;
               event.currentTarget.style.color = "#fff";
             }}
             onMouseLeave={(event) => {
