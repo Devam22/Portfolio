@@ -1,3 +1,5 @@
+import { profile } from "@/content/profile";
+
 export type GitHubRepo = {
   id: number;
   name: string;
@@ -19,8 +21,6 @@ export type GitHubFetchResult = {
   error: string | null;
 };
 
-const USERNAME = "Devam22";
-
 export async function fetchAllRepos(): Promise<GitHubFetchResult> {
   const headers: HeadersInit = {
     Accept: "application/vnd.github+json",
@@ -32,9 +32,12 @@ export async function fetchAllRepos(): Promise<GitHubFetchResult> {
     headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   }
 
+  const username = profile.githubUsername;
+  const limit = profile.projectsLimit ?? 4;
+
   try {
     const response = await fetch(
-      `https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`,
+      `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`,
       {
         headers,
         next: { revalidate: 3600 },
@@ -50,8 +53,9 @@ export async function fetchAllRepos(): Promise<GitHubFetchResult> {
 
     const data = (await response.json()) as GitHubRepo[];
 
-    return {
-      repos: data.map((repo) => ({
+    const repos = data
+      .filter((repo) => !repo.fork && !repo.archived)
+      .map((repo) => ({
         id: repo.id,
         name: repo.name,
         full_name: repo.full_name,
@@ -65,9 +69,10 @@ export async function fetchAllRepos(): Promise<GitHubFetchResult> {
         fork: repo.fork,
         archived: repo.archived,
         homepage: repo.homepage,
-      })),
-      error: null,
-    };
+      }))
+      .slice(0, limit);
+
+    return { repos, error: null };
   } catch {
     return {
       repos: [],

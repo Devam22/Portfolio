@@ -3,70 +3,88 @@
 import { profile } from "@/content/profile";
 import { SectionHeading } from "@/components/SectionHeading";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { socialIcons } from "@/lib/icons";
+import { HiArrowDownTray } from "react-icons/hi2";
 
-const links = [
+const details = [
   {
-    label: "Email",
+    key: "email" as const,
+    label: profile.contactLabels.email,
     value: profile.email,
-    href: `mailto:${profile.email}`,
+    Icon: socialIcons.email.Icon,
+    color: socialIcons.email.color,
   },
   {
-    label: "Phone",
+    key: "phone" as const,
+    label: profile.contactLabels.phone,
     value: profile.phone,
-    href: `tel:${profile.phone.replace(/\s+/g, "")}`,
+    Icon: socialIcons.phone.Icon,
+    color: socialIcons.phone.color,
   },
   {
-    label: "LinkedIn",
-    value: "linkedin.com/in/devam-zanzmera",
-    href: profile.linkedin,
+    key: "linkedin" as const,
+    label: profile.contactLabels.linkedin,
+    value: profile.contactLabels.linkedinDisplay,
+    Icon: socialIcons.linkedin.Icon,
+    color: socialIcons.linkedin.color,
   },
   {
-    label: "GitHub",
-    value: "github.com/Devam22",
-    href: profile.github,
+    key: "github" as const,
+    label: profile.contactLabels.github,
+    value: profile.contactLabels.githubDisplay,
+    Icon: socialIcons.github.Icon,
+    color: socialIcons.github.color,
   },
 ];
 
 export function Contact() {
+  const copy = profile.sections.contact;
+
   return (
-    <section id="contact" className="section-pad py-24 sm:py-28">
+    <section id="contact" className="section-pad section-frame pb-16 sm:pb-20">
       <div className="container-shell">
         <SectionHeading
-          eyebrow="06 — Contact"
-          title="Let’s build something reliable."
-          description="Open to conversations about production ML, MLOps, and applied AI systems."
+          eyebrow={copy.eyebrow}
+          title={copy.title}
+          description={copy.description}
         />
 
         <FadeIn>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                className="group rounded-2xl border border-[var(--border)] bg-[var(--background-elevated)] px-5 py-5 transition hover:border-[var(--accent)]"
-              >
-                <p className="font-mono text-xs tracking-[0.18em] text-[var(--accent)] uppercase">
-                  {link.label}
-                </p>
-                <p className="link-underline mt-3 text-lg text-[var(--foreground)] group-hover:text-[var(--accent)]">
-                  {link.value}
-                </p>
-              </a>
-            ))}
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+            {details.map((item) => {
+              const Icon = item.Icon;
+              return (
+                <div key={item.key} className="contact-row">
+                  <span
+                    className="icon-badge shrink-0"
+                    style={{
+                      color: item.color,
+                      background: `color-mix(in srgb, ${item.color} 16%, transparent)`,
+                    }}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="font-mono text-[10px] font-semibold tracking-[0.18em] text-[var(--muted)] uppercase sm:text-xs">
+                      {item.label}
+                    </p>
+                    <p className="mt-1 select-all break-all text-base font-semibold text-[var(--foreground)] sm:text-lg">
+                      {item.value}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-6 sm:mt-8">
             <a
               href={profile.resumePath}
               download={profile.resumeDownloadName}
               className="btn-primary"
             >
-              Download Resume
-            </a>
-            <a href={`mailto:${profile.email}`} className="btn-ghost">
-              Send an email
+              <HiArrowDownTray className="h-4 w-4" />
+              {profile.cta.resume}
             </a>
           </div>
         </FadeIn>

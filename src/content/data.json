@@ -1,0 +1,178 @@
+{
+  "name": "Devam Zanzmera",
+  "role": "AI/ML Engineer",
+  "location": "Toronto, Canada",
+  "email": "devamzanzmera22@gmail.com",
+  "phone": "+1 647-577-9653",
+  "linkedin": "https://www.linkedin.com/in/devam-zanzmera",
+  "github": "https://github.com/Devam22",
+  "githubUsername": "Devam22",
+  "resumePath": "/resume.pdf",
+  "resumeDownloadName": "Devam_Zanzmera_Resume.pdf",
+  "heroBadge": "Toronto, Canada · Open to opportunities",
+  "heroLine": "Building reliable, scalable, and explainable machine learning systems for healthcare and banking.",
+  "heroTags": "Production ML · Explainability · MLOps",
+  "cta": {
+    "resume": "Download Resume",
+    "work": "View work",
+    "contact": "Contact",
+    "email": "Send an email"
+  },
+  "footerNote": "AI/ML Engineer · Toronto",
+  "projectsLimit": 4,
+  "nav": [
+    {
+      "label": "About",
+      "href": "#about"
+    },
+    {
+      "label": "Work",
+      "href": "#experience"
+    },
+    {
+      "label": "Projects",
+      "href": "#projects"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
+  ],
+  "sections": {
+    "about": {
+      "eyebrow": "About",
+      "title": "Explainable ML in production.",
+      "description": "Healthcare and banking models that teams can trust."
+    },
+    "experience": {
+      "eyebrow": "Experience",
+      "title": "Shipped models in healthcare and banking."
+    },
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "Selected work from GitHub.",
+      "description": "Four most recently updated public repositories, synced hourly."
+    },
+    "skills": {
+      "eyebrow": "Skills",
+      "title": "A full ML lifecycle toolkit.",
+      "description": "Core tools across modeling, GenAI, and production systems."
+    },
+    "education": {
+      "eyebrow": "Education",
+      "title": "Academic foundation."
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Let’s build something reliable.",
+      "description": "Open to conversations about production ML, MLOps, and applied AI systems."
+    }
+  },
+  "summary": [
+    "AI/ML Engineer with 3+ years shipping explainable models for healthcare and banking on AWS and Azure.",
+    "Also build RAG, real-time NLP pipelines, and computer vision systems end to end."
+  ],
+  "highlights": [
+    "Healthcare ML",
+    "SHAP Explainability",
+    "Production MLOps",
+    "RAG & NLP"
+  ],
+  "experience": [
+    {
+      "company": "Oracle Health",
+      "title": "AI/ML Engineer",
+      "location": "Toronto, Canada",
+      "employmentType": "Contract",
+      "period": "06/2024 – Present",
+      "bullets": [
+        "Built hospital readmission risk models across three Canadian provinces (85% AUC).",
+        "Owned PIPEDA-compliant Databricks/PySpark pipelines and 50+ clinical features.",
+        "Deployed XGBoost + SHAP on SageMaker with FastAPI and CI/CD monitoring."
+      ]
+    },
+    {
+      "company": "Accenture",
+      "title": "AI/ML Engineer",
+      "location": "Mumbai, India",
+      "employmentType": "Permanent",
+      "period": "09/2021 – 04/2023",
+      "bullets": [
+        "Delivered credit default models that improved performance 15% over baselines (74% ROC-AUC).",
+        "Engineered 50 financial features and SHAP explanations for credit officers.",
+        "Shipped Dockerized FastAPI scoring on Azure with sub-100ms latency."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Applied Computing — Specialization in Artificial Intelligence",
+      "school": "University of Windsor",
+      "location": "Windsor, ON, Canada",
+      "period": "05/2023 – 08/2024"
+    },
+    {
+      "degree": "Bachelor of Technology in Computer Engineering",
+      "school": "Pandit Deendayal Energy University",
+      "location": "Gandhinagar, Gujarat, India",
+      "period": "08/2018 – 05/2022"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Languages",
+      "items": [
+        "Python",
+        "SQL"
+      ]
+    },
+    {
+      "category": "ML & Deep Learning",
+      "items": [
+        "PyTorch",
+        "Scikit-learn",
+        "XGBoost",
+        "Hugging Face Transformers"
+      ]
+    },
+    {
+      "category": "Generative AI",
+      "items": [
+        "RAG",
+        "LangChain",
+        "GPT-4",
+        "BERT"
+      ]
+    },
+    {
+      "category": "MLOps & Cloud",
+      "items": [
+        "MLflow",
+        "Docker",
+        "FastAPI",
+        "AWS SageMaker",
+        "Azure ML Studio"
+      ]
+    },
+    {
+      "category": "Data",
+      "items": [
+        "Pandas",
+        "PySpark",
+        "PostgreSQL",
+        "Kafka"
+      ]
+    }
+  ],
+  "contactLabels": {
+    "email": "Email",
+    "phone": "Phone",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "linkedinDisplay": "linkedin.com/in/devam-zanzmera",
+    "githubDisplay": "github.com/Devam22"
+  },
+  "navBrand": "DZ",
+  "photo": "/profile.jpg",
+  "photoAlt": "Devam Zanzmera"
+}

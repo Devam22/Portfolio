@@ -1,37 +1,58 @@
 @import "tailwindcss";
 
+/* Light = dull white; Dark = black */
 :root {
-  --background: #f4f7f8;
-  --background-elevated: rgba(255, 255, 255, 0.72);
-  --foreground: #0f172a;
-  --muted: #64748b;
-  --accent: #0f766e;
-  --accent-soft: rgba(15, 118, 110, 0.12);
-  --border: rgba(15, 23, 42, 0.1);
-  --lattice: rgba(15, 118, 110, 0.08);
-  --lattice-strong: rgba(15, 118, 110, 0.16);
-  --glow: rgba(14, 116, 144, 0.18);
-  --nav-bg: rgba(244, 247, 248, 0.82);
-  --timeline: #cbd5e1;
-  --chip: rgba(15, 23, 42, 0.04);
-  --shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  --background: #ebeae6;
+  --background-elevated: #f5f4f0;
+  --foreground: #121212;
+  --muted: #5c5c5c;
+  --accent: #1a6bff;
+  --accent-2: #e04a1a;
+  --accent-3: #0f9d8a;
+  --accent-soft: rgba(26, 107, 255, 0.12);
+  --accent-2-soft: rgba(224, 74, 26, 0.12);
+  --accent-3-soft: rgba(15, 157, 138, 0.12);
+  --border: rgba(18, 18, 18, 0.12);
+  --lattice: rgba(18, 18, 18, 0.06);
+  --lattice-strong: rgba(26, 107, 255, 0.18);
+  --glow: rgba(26, 107, 255, 0.14);
+  --glow-2: rgba(224, 74, 26, 0.1);
+  --nav-bg: rgba(245, 244, 240, 0.92);
+  --timeline: #cfcfc8;
+  --chip: rgba(18, 18, 18, 0.05);
+  --chip-text: #121212;
+  --shadow: 0 8px 24px rgba(18, 18, 18, 0.1), 0 2px 6px rgba(18, 18, 18, 0.06);
+  --shadow-strong: 0 16px 40px rgba(18, 18, 18, 0.14), 0 4px 12px rgba(18, 18, 18, 0.08);
+  --on-accent: #ffffff;
+  --name: #121212;
+  --gradient-text: linear-gradient(120deg, #1a6bff 0%, #0f9d8a 48%, #e04a1a 100%);
 }
 
 .dark {
-  --background: #0b0f14;
-  --background-elevated: rgba(17, 24, 33, 0.72);
-  --foreground: #e8eef4;
-  --muted: #94a3b8;
-  --accent: #2dd4bf;
-  --accent-soft: rgba(45, 212, 191, 0.12);
-  --border: rgba(232, 238, 244, 0.1);
-  --lattice: rgba(45, 212, 191, 0.06);
-  --lattice-strong: rgba(45, 212, 191, 0.14);
-  --glow: rgba(45, 212, 191, 0.12);
-  --nav-bg: rgba(11, 15, 20, 0.84);
-  --timeline: #334155;
-  --chip: rgba(232, 238, 244, 0.05);
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  --background: #000000;
+  --background-elevated: #111111;
+  --foreground: #ffffff;
+  --muted: #b0b0b0;
+  --accent: #5aa2ff;
+  --accent-2: #ff6b3d;
+  --accent-3: #2ee6c5;
+  --accent-soft: rgba(90, 162, 255, 0.16);
+  --accent-2-soft: rgba(255, 107, 61, 0.14);
+  --accent-3-soft: rgba(46, 230, 197, 0.12);
+  --border: rgba(255, 255, 255, 0.12);
+  --lattice: rgba(255, 255, 255, 0.06);
+  --lattice-strong: rgba(90, 162, 255, 0.22);
+  --glow: rgba(90, 162, 255, 0.18);
+  --glow-2: rgba(255, 107, 61, 0.12);
+  --nav-bg: rgba(0, 0, 0, 0.88);
+  --timeline: #2a2a2a;
+  --chip: rgba(255, 255, 255, 0.08);
+  --chip-text: #ffffff;
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-strong: 0 18px 48px rgba(0, 0, 0, 0.65), 0 6px 16px rgba(0, 0, 0, 0.4);
+  --on-accent: #000000;
+  --name: #ffffff;
+  --gradient-text: linear-gradient(120deg, #5aa2ff 0%, #2ee6c5 48%, #ff6b3d 100%);
 }
 
 @theme inline {
@@ -39,6 +60,8 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
   --color-accent-soft: var(--accent-soft);
   --color-border: var(--border);
   --font-sans: var(--font-plex-sans);
@@ -48,20 +71,28 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+section[id] {
+  scroll-margin-top: 1rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: inherit;
+  color: inherit;
   font-family: var(--font-plex-sans), system-ui, sans-serif;
-  transition:
-    background-color 0.45s ease,
-    color 0.45s ease;
+  overflow-x: hidden;
 }
 
 ::selection {
-  background: var(--accent-soft);
-  color: var(--foreground);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .font-display {
@@ -74,66 +105,324 @@ body {
 
 .surface-mist {
   background:
-    radial-gradient(1200px 600px at 12% -10%, var(--glow), transparent 55%),
-    radial-gradient(900px 500px at 88% 8%, var(--accent-soft), transparent 50%),
+    radial-gradient(900px 520px at 8% -8%, var(--glow), transparent 55%),
+    radial-gradient(820px 480px at 92% 4%, var(--glow-2), transparent 50%),
+    radial-gradient(700px 420px at 50% 100%, var(--accent-3-soft), transparent 55%),
     var(--background);
 }
 
+.text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.name-title {
+  color: var(--name);
+}
+
 .section-pad {
-  @apply px-5 sm:px-8 lg:px-12;
+  @apply px-4 sm:px-6 md:px-8 lg:px-12;
 }
 
 .container-shell {
   @apply mx-auto w-full max-w-6xl;
 }
 
-.link-underline {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 1.5px;
-  transition: background-size 0.35s ease;
+.section-frame {
+  @apply relative py-12 sm:py-16 md:py-20;
 }
 
-.link-underline:hover,
-.link-underline:focus-visible {
-  background-size: 100% 1.5px;
+.section-frame::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent),
+    var(--accent-3),
+    var(--accent-2),
+    transparent
+  );
+  opacity: 0.35;
 }
 
-.btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition;
-  background: var(--accent);
-  color: #041016;
+.layout-asymmetric {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .layout-asymmetric {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.75rem;
+  }
+}
+
+.orb {
+  border-radius: 9999px;
+  filter: blur(64px);
+  opacity: 0.75;
+}
+
+.signal-band {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-soft),
+    var(--accent-3-soft),
+    transparent
+  );
+  opacity: 0.65;
+}
+
+.signal-band-alt {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-2-soft),
+    var(--accent-soft),
+    transparent
+  );
+  opacity: 0.55;
+}
+
+.geo-ring {
+  border: 2px solid var(--accent);
+  border-radius: 9999px;
+  opacity: 0.22;
+}
+
+.geo-diamond {
+  border: 2px solid var(--accent-2);
+  transform: rotate(45deg);
+  opacity: 0.24;
+  border-radius: 0.75rem;
+}
+
+.geo-cross {
+  background:
+    linear-gradient(var(--accent-3), var(--accent-3)) center / 100% 2px no-repeat,
+    linear-gradient(var(--accent-3), var(--accent-3)) center / 2px 100% no-repeat;
+  opacity: 0.35;
+}
+
+.hero-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-stage::after {
+  content: "";
+  position: absolute;
+  inset: auto -8% -18% auto;
+  width: min(380px, 50vw);
+  height: min(380px, 50vw);
+  border-radius: 40% 60% 55% 45%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    var(--accent-soft),
+    transparent 65%
+  );
+  border: 1px solid var(--border);
+  z-index: -1;
+  opacity: 0.85;
+}
+
+@media (max-width: 640px) {
+  .hero-stage::after {
+    width: min(240px, 70vw);
+    height: min(240px, 70vw);
+    opacity: 0.45;
+  }
+
+  .geo-ring,
+  .geo-diamond,
+  .geo-cross,
+  .signal-band,
+  .signal-band-alt {
+    display: none;
+  }
+
+  .orb {
+    opacity: 0.45;
+  }
+}
+
+.panel,
+.panel-strong,
+.contact-row,
+.chip,
+.brand-mark,
+.icon-badge {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    filter 0.25s ease;
+}
+
+.panel {
+  background: var(--background-elevated);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
 
-.dark .btn-primary {
-  color: #042f2e;
+.panel:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-strong);
+}
+
+.panel-strong {
+  background: var(--background-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-strong);
+}
+
+.panel-strong:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-strong);
+}
+
+.btn-primary {
+  @apply inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition sm:w-auto;
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: var(--shadow);
 }
 
 .btn-primary:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.08);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-strong);
+}
+
+.btn-secondary {
+  @apply inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition sm:w-auto;
+  background: var(--accent-2);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.btn-secondary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-strong);
 }
 
 .btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition;
+  @apply inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition sm:w-auto;
   border: 1px solid var(--border);
   color: var(--foreground);
   background: var(--background-elevated);
-  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
 }
 
 .btn-ghost:hover {
   border-color: var(--accent);
   color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-strong);
 }
 
 .chip {
-  @apply inline-flex items-center rounded-full px-3 py-1 text-xs;
+  @apply inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium;
   background: var(--chip);
   border: 1px solid var(--border);
-  color: var(--muted);
+  color: var(--chip-text);
+  box-shadow: var(--shadow);
+}
+
+.chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-strong);
+  background: var(--accent-soft);
+}
+
+.icon-badge {
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-xl;
+  background: var(--chip);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.icon-badge:hover {
+  transform: scale(1.06);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-strong);
+}
+
+.social-btn {
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-full transition;
+  border: 1px solid var(--border);
+  background: var(--background-elevated);
+  color: var(--foreground);
+  box-shadow: var(--shadow);
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: var(--shadow-strong);
+}
+
+.brand-mark {
+  @apply inline-flex h-9 w-9 items-center justify-center rounded-xl text-sm font-bold tracking-wide;
+  background: var(--foreground);
+  color: var(--background);
+  box-shadow: var(--shadow);
+}
+
+.brand-mark:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-strong);
+}
+
+.nav-shell {
+  box-shadow: var(--shadow);
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: 1rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.contact-row:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-strong);
+  background: var(--accent-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .panel:hover,
+  .panel-strong:hover,
+  .contact-row:hover,
+  .chip:hover,
+  .brand-mark:hover,
+  .icon-badge:hover,
+  .social-btn:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-ghost:hover {
+    will-change: transform;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

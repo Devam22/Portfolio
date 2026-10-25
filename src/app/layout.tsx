@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans, Syne } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { LatticeBackground } from "@/components/LatticeBackground";
+import { SiteBackground } from "@/components/SiteBackground";
 import { profile } from "@/content/profile";
 import "./globals.css";
 
@@ -26,7 +26,6 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: `${profile.name} · ${profile.role}`,
   description: profile.heroLine,
-  metadataBase: new URL("https://github.com/Devam22"),
   openGraph: {
     title: `${profile.name} · ${profile.role}`,
     description: profile.heroLine,
@@ -39,6 +38,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -46,9 +51,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${syne.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="relative min-h-full flex flex-col">
+      <body className="relative flex min-h-full flex-col overflow-x-hidden">
         <ThemeProvider>
-          <LatticeBackground />
+          <SiteBackground />
           {children}
         </ThemeProvider>
       </body>
