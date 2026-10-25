@@ -14,10 +14,10 @@
   --accent-3-soft: rgba(15, 157, 138, 0.12);
   --border: rgba(18, 18, 18, 0.12);
   --border-hover: rgba(18, 18, 18, 0.4);
-  --lattice: rgba(18, 18, 18, 0.06);
-  --lattice-strong: rgba(26, 107, 255, 0.18);
-  --glow: rgba(26, 107, 255, 0.14);
-  --glow-2: rgba(224, 74, 26, 0.1);
+  --lattice: rgba(18, 18, 18, 0.09);
+  --lattice-strong: rgba(26, 107, 255, 0.28);
+  --glow: rgba(26, 107, 255, 0.22);
+  --glow-2: rgba(224, 74, 26, 0.16);
   --nav-bg: rgba(245, 244, 240, 0.92);
   --timeline: #cfcfc8;
   --chip: rgba(18, 18, 18, 0.05);
@@ -94,7 +94,7 @@ button:focus:not(:focus-visible) {
 }
 
 section[id] {
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 1.25rem;
 }
 
 body {
@@ -152,7 +152,7 @@ body {
 }
 
 .section-frame {
-  @apply relative py-12 sm:py-16 md:py-20;
+  @apply relative py-16 sm:py-20 md:py-28 lg:py-32;
 }
 
 .section-frame::before {
@@ -177,10 +177,16 @@ body {
   gap: 1.25rem;
 }
 
+@media (min-width: 640px) {
+  .layout-asymmetric {
+    gap: 1.75rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .layout-asymmetric {
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 1.75rem;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 2.5rem;
   }
 }
 
@@ -235,14 +241,32 @@ body {
 .hero-stage {
   position: relative;
   isolation: isolate;
+  overflow-x: clip;
+}
+
+.layout-asymmetric > * {
+  min-width: 0;
+}
+
+.section-quiet {
+  opacity: 1;
+}
+
+.section-quiet .chip {
+  box-shadow: none;
+}
+
+.section-dense .panel {
+  box-shadow: var(--shadow-strong);
 }
 
 .hero-stage::after {
   content: "";
   position: absolute;
-  inset: auto -8% -18% auto;
-  width: min(380px, 50vw);
-  height: min(380px, 50vw);
+  right: 0;
+  bottom: -12%;
+  width: min(320px, 55vw);
+  height: min(320px, 55vw);
   border-radius: 40% 60% 55% 45%;
   background: radial-gradient(
     circle at 30% 30%,
@@ -252,13 +276,15 @@ body {
   border: 1px solid var(--border);
   z-index: -1;
   opacity: 0.85;
+  pointer-events: none;
 }
 
 @media (max-width: 640px) {
   .hero-stage::after {
-    width: min(240px, 70vw);
-    height: min(240px, 70vw);
-    opacity: 0.45;
+    width: min(200px, 60vw);
+    height: min(200px, 60vw);
+    opacity: 0.4;
+    bottom: -8%;
   }
 
   .geo-ring,

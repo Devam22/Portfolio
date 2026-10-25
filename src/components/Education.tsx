@@ -10,17 +10,17 @@ export function Education() {
   const EduIcon = socialIcons.education.Icon;
 
   return (
-    <section id="education" className="section-pad section-frame">
+    <section id="education" className="section-pad section-frame section-quiet">
       <div className="container-shell">
         <SectionHeading eyebrow={copy.eyebrow} title={copy.title} />
 
-        <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-2 md:gap-12">
           {profile.education.map((item, index) => (
             <FadeIn key={item.school} delay={index * 0.08}>
-              <article className="panel h-full min-w-0 rounded-2xl p-4 sm:rounded-[1.75rem] sm:p-6">
-                <div className="mb-3 flex min-w-0 items-center gap-3 sm:mb-4">
+              <article className="min-w-0 border-t border-[var(--border)] pt-5 sm:pt-6">
+                <div className="mb-3 flex min-w-0 items-center gap-3">
                   <span
-                    className="icon-badge shrink-0"
+                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
                     style={{
                       color: index === 0 ? "var(--accent)" : "var(--accent-2)",
                       background:
@@ -29,7 +29,7 @@ export function Education() {
                           : "var(--accent-2-soft)",
                     }}
                   >
-                    <EduIcon className="h-5 w-5" />
+                    <EduIcon className="h-4 w-4" />
                   </span>
                   <p className="font-mono min-w-0 text-[10px] font-semibold text-[var(--accent)] sm:text-xs">
                     {item.period}

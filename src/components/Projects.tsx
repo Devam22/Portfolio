@@ -21,7 +21,7 @@ export function Projects({
   const GithubIcon = socialIcons.github.Icon;
 
   return (
-    <section id="projects" className="section-pad section-frame">
+    <section id="projects" className="section-pad section-frame section-dense">
       <div className="container-shell">
         <SectionHeading
           eyebrow={copy.eyebrow}
@@ -29,13 +29,13 @@ export function Projects({
           description={copy.description}
         />
 
-        <div className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background-elevated)] px-3 py-1.5 sm:mb-6">
+        <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background-elevated)] px-3 py-1.5 sm:mb-8">
           <GithubIcon
             className="h-4 w-4 shrink-0"
             style={{ color: socialIcons.github.color }}
           />
           <span className="font-mono truncate text-[10px] font-semibold text-[var(--muted)] sm:text-xs">
-            Featured · @{profile.githubUsername}
+            Selected work · @{profile.githubUsername}
           </span>
         </div>
 
@@ -49,7 +49,7 @@ export function Projects({
           <p className="text-sm text-[var(--muted)]">No projects to show yet.</p>
         ) : null}
 
-        <ul className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 md:gap-7">
           {projects.map((project, index) => {
             const lang = getLanguageIcon(project.language);
             const LangIcon = lang.Icon;
@@ -67,14 +67,14 @@ export function Projects({
                   ease: [0.22, 1, 0.36, 1] as const,
                 }}
               >
-                <motion.a
+                <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="panel group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl p-4 sm:rounded-[1.75rem] sm:p-5 md:p-6"
+                  className="panel group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl p-5 sm:rounded-[1.75rem] sm:p-6"
                 >
                   <div
-                    className="absolute inset-x-0 top-0 h-1"
+                    className="absolute inset-x-0 top-0 h-1 origin-left scale-x-100 transition duration-300 group-hover:h-1.5"
                     style={{
                       background:
                         index % 3 === 0
@@ -85,24 +85,19 @@ export function Projects({
                     }}
                   />
 
-                  <div className="flex min-w-0 items-start gap-2">
+                  <div className="flex min-w-0 items-start gap-2.5">
                     <FaGithub className="mt-1 h-5 w-5 shrink-0 text-[var(--foreground)]" />
-                    <h3 className="font-display min-w-0 break-words text-lg tracking-tight text-[var(--foreground)] group-hover:text-[var(--accent)] sm:text-xl">
+                    <h3 className="font-display min-w-0 flex-1 break-words text-lg tracking-tight text-[var(--foreground)] transition group-hover:text-[var(--accent)] sm:text-xl">
                       {project.name}
                     </h3>
-                    {project.featured ? (
-                      <span className="font-mono mt-1 shrink-0 rounded-full border border-[var(--border)] px-2 py-0.5 text-[9px] font-semibold tracking-wide text-[var(--accent)] uppercase">
-                        Featured
-                      </span>
-                    ) : null}
-                    <HiArrowTopRightOnSquare className="mt-1.5 hidden h-4 w-4 shrink-0 text-[var(--muted)] opacity-0 transition group-hover:opacity-100 sm:block" />
+                    <HiArrowTopRightOnSquare className="mt-1.5 hidden h-4 w-4 shrink-0 text-[var(--muted)] opacity-0 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 sm:block" />
                   </div>
 
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">
                     {project.description}
                   </p>
 
-                  <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
+                  <div className="mt-5 flex flex-wrap gap-2">
                     {project.stack.length > 0
                       ? project.stack.slice(0, 4).map((item) => (
                           <span key={item} className="chip">
@@ -131,12 +126,12 @@ export function Projects({
                       </span>
                     ) : null}
                     {project.updated_at ? (
-                      <span className="font-mono text-[10px] text-[var(--muted)] sm:text-xs">
+                      <span className="font-mono self-center text-[10px] text-[var(--muted)] sm:text-xs">
                         {formatRelativeDate(project.updated_at)}
                       </span>
                     ) : null}
                   </div>
-                </motion.a>
+                </a>
               </motion.li>
             );
           })}

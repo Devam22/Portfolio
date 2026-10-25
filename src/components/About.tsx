@@ -24,7 +24,7 @@ export function About() {
   const copy = profile.sections.about;
 
   return (
-    <section id="about" className="section-pad section-frame">
+    <section id="about" className="section-pad section-frame section-dense">
       <div className="container-shell">
         <SectionHeading
           eyebrow={copy.eyebrow}
@@ -54,7 +54,7 @@ export function About() {
             </div>
           </FadeIn>
 
-          <Stagger className="grid grid-cols-1 content-start gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-1">
+          <Stagger className="grid grid-cols-1 content-start gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-1">
             {profile.highlights.map((item, index) => {
               const meta = highlightMeta[index % highlightMeta.length];
               const Icon = meta.icon;

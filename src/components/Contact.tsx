@@ -48,7 +48,7 @@ export function Contact() {
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
-    <section id="contact" className="section-pad section-frame pb-16 sm:pb-20">
+    <section id="contact" className="section-pad section-frame pb-20 sm:pb-24 md:pb-28">
       <div className="container-shell">
         <SectionHeading
           eyebrow={copy.eyebrow}
@@ -57,8 +57,8 @@ export function Contact() {
         />
 
         <FadeIn>
-          <div className="mx-auto max-w-3xl space-y-3 sm:space-y-4">
-            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+          <div className="mx-auto max-w-3xl space-y-4 sm:space-y-5 md:space-y-6">
+            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
               {details.map((item, index) => {
                 const Icon = item.Icon;
 
@@ -105,7 +105,7 @@ export function Contact() {
             </ul>
 
             <div className="panel-static flex flex-col gap-3 rounded-2xl px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:rounded-[1.75rem] sm:px-5 sm:py-5">
-              <p className="inline-flex max-w-full items-center gap-2 text-[var(--muted)]">
+              <p className="inline-flex min-w-0 max-w-full items-center gap-2 text-[var(--muted)]">
                 <HiOutlineMapPin className="h-4 w-4 shrink-0 text-[var(--accent)]" />
                 <span className="font-mono truncate text-[10px] font-semibold tracking-wide uppercase sm:text-xs">
                   {profile.location}
@@ -116,7 +116,7 @@ export function Contact() {
                 download={profile.resumeDownloadName}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary"
+                className="btn-primary shrink-0"
               >
                 <HiArrowDownTray className="h-4 w-4" />
                 {profile.cta.resume}
