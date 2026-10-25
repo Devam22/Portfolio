@@ -42,6 +42,11 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  colorScheme: "dark light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ebeae6" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -49,9 +54,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${syne.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${syne.variable} ${plexSans.variable} ${plexMono.variable} dark h-full antialiased`}
     >
-      <body className="relative flex min-h-full flex-col overflow-x-hidden">
+      <body className="relative flex min-h-full flex-col overflow-x-hidden bg-[var(--background)] text-[var(--foreground)]">
         <ThemeProvider>
           <SiteBackground />
           {children}

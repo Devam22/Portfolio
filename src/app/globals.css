@@ -26,6 +26,7 @@
   --on-accent: #ffffff;
   --name: #121212;
   --gradient-text: linear-gradient(120deg, #1a6bff 0%, #0f9d8a 48%, #e04a1a 100%);
+  color-scheme: light;
 }
 
 .dark {
@@ -53,6 +54,7 @@
   --on-accent: #000000;
   --name: #ffffff;
   --gradient-text: linear-gradient(120deg, #5aa2ff 0%, #2ee6c5 48%, #ff6b3d 100%);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -72,7 +74,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   transition:
     background-color 0.4s ease,
@@ -84,8 +86,9 @@ section[id] {
 }
 
 body {
-  background: inherit;
-  color: inherit;
+  min-height: 100%;
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-plex-sans), system-ui, sans-serif;
   overflow-x: hidden;
 }
