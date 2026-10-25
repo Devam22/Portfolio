@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { profile } from "@/content/profile";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -8,7 +8,63 @@ import { handleSectionNav } from "@/lib/scroll";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState<string | null>(null);
   const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const sectionIds = profile.nav
+      .map((item) => item.href.replace("#", ""))
+      .filter(Boolean);
+
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible[0]?.target.id) {
+          setActiveHref(`#${visible[0].target.id}`);
+          return;
+        }
+
+        const anyVisible = entries.some((entry) => entry.isIntersecting);
+        if (!anyVisible) {
+          const nearTop = window.scrollY < 120;
+          if (nearTop) setActiveHref(null);
+        }
+      },
+      {
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0.15, 0.35, 0.6],
+      },
+    );
+
+    for (const el of elements) observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const linkClass = (href: string, mobile = false) => {
+    const active = activeHref === href;
+    if (mobile) {
+      return `font-mono px-3 py-3.5 text-xs font-semibold tracking-[0.14em] uppercase transition ${
+        active
+          ? "bg-[var(--accent-soft)] text-[var(--accent)]"
+          : "text-[var(--foreground)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
+      }`;
+    }
+
+    return `font-mono rounded-full px-3.5 py-2 text-[11px] font-semibold tracking-[0.14em] uppercase transition lg:px-4 ${
+      active
+        ? "bg-[var(--accent-soft)] text-[var(--accent)]"
+        : "text-[var(--muted)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
+    }`;
+  };
 
   return (
     <header className="nav-shell relative z-20 border-b border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-md">
@@ -42,7 +98,8 @@ export function Nav() {
             <a
               key={item.href}
               href={item.href}
-              className="font-mono rounded-full px-3.5 py-2 text-[11px] font-semibold tracking-[0.14em] text-[var(--muted)] uppercase transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] lg:px-4"
+              aria-current={activeHref === item.href ? "true" : undefined}
+              className={linkClass(item.href)}
               onClick={(event) => handleSectionNav(event, item.href)}
             >
               {item.label}
@@ -100,7 +157,8 @@ export function Nav() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="font-mono px-3 py-3.5 text-xs font-semibold tracking-[0.14em] text-[var(--foreground)] uppercase transition hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
+                  aria-current={activeHref === item.href ? "true" : undefined}
+                  className={linkClass(item.href, true)}
                   style={{
                     borderLeft: `3px solid ${
                       index % 3 === 0

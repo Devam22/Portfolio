@@ -105,6 +105,8 @@ export function Hero() {
               <a
                 href={profile.resumePath}
                 download={profile.resumeDownloadName}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary"
               >
                 <HiArrowDownTray className="h-4 w-4" />

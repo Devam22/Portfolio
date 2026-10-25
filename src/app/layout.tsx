@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans, Syne } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SiteBackground } from "@/components/SiteBackground";
+import { JsonLd } from "@/components/JsonLd";
+import { Analytics } from "@/components/Analytics";
 import { profile } from "@/content/profile";
+import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
 const syne = Syne({
@@ -23,18 +26,54 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
-  title: `${profile.name} · ${profile.role}`,
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${profile.name} · ${profile.role}`,
+    template: `%s · ${profile.name}`,
+  },
   description: profile.heroLine,
+  applicationName: `${profile.name} Portfolio`,
+  authors: [{ name: profile.name, url: siteUrl }],
+  creator: profile.name,
+  keywords: [
+    profile.name,
+    profile.role,
+    "Machine Learning",
+    "MLOps",
+    "Toronto",
+    "Explainable AI",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: `${profile.name} · ${profile.role}`,
     description: profile.heroLine,
     type: "website",
+    url: siteUrl,
+    siteName: profile.name,
+    locale: "en_CA",
+    images: [
+      {
+        url: profile.photo,
+        width: 400,
+        height: 400,
+        alt: profile.photoAlt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${profile.name} · ${profile.role}`,
     description: profile.heroLine,
+    images: [profile.photo],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -56,10 +95,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${syne.variable} ${plexSans.variable} ${plexMono.variable} dark h-full antialiased`}
     >
-      <body className="relative flex min-h-full flex-col overflow-x-hidden bg-[var(--background)] text-[var(--foreground)]">
+      <body className="overflow-x-hidden bg-[var(--background)] text-[var(--foreground)]">
         <ThemeProvider>
-          <SiteBackground />
-          {children}
+          <div className="relative flex min-h-dvh flex-col">
+            <SiteBackground />
+            {children}
+          </div>
+          <JsonLd />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

@@ -1,25 +1,36 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
 
 export function SiteBackground() {
   const reduce = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  const animate = !reduce && !isMobile;
 
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      className="pointer-events-none absolute inset-0 -z-10 min-h-full overflow-hidden"
     >
-      <div className="surface-mist absolute inset-0" />
+      <div className="surface-mist absolute inset-0 min-h-full" />
 
-      {/* Soft color orbs */}
       <motion.div
         className="orb absolute -top-28 left-[-8%] h-[28rem] w-[28rem]"
         style={{ background: "var(--glow)" }}
         animate={
-          reduce
-            ? undefined
-            : { x: [0, 50, 0], y: [0, 35, 0], scale: [1, 1.15, 1] }
+          animate
+            ? { x: [0, 50, 0], y: [0, 35, 0], scale: [1, 1.15, 1] }
+            : undefined
         }
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -27,9 +38,9 @@ export function SiteBackground() {
         className="orb absolute top-[28%] right-[-12%] h-[30rem] w-[30rem]"
         style={{ background: "var(--glow-2)" }}
         animate={
-          reduce
-            ? undefined
-            : { x: [0, -40, 0], y: [0, -50, 0], scale: [1, 1.1, 1] }
+          animate
+            ? { x: [0, -40, 0], y: [0, -50, 0], scale: [1, 1.1, 1] }
+            : undefined
         }
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -37,30 +48,30 @@ export function SiteBackground() {
         className="orb absolute bottom-[-12%] left-[25%] h-[24rem] w-[24rem]"
         style={{ background: "var(--accent-3-soft)" }}
         animate={
-          reduce
-            ? undefined
-            : { opacity: [0.4, 0.9, 0.4], scale: [1, 1.2, 1] }
+          animate ? { opacity: [0.4, 0.9, 0.4], scale: [1, 1.2, 1] } : undefined
         }
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Diagonal signal bands */}
-      <div className="signal-band absolute top-[18%] -left-20 h-24 w-[140%] rotate-[-8deg]" />
-      <div className="signal-band-alt absolute top-[62%] -right-24 h-16 w-[130%] rotate-[6deg]" />
+      {!isMobile ? (
+        <>
+          <div className="signal-band absolute top-[18%] -left-20 h-24 w-[140%] rotate-[-8deg]" />
+          <div className="signal-band-alt absolute top-[62%] -right-24 h-16 w-[130%] rotate-[6deg]" />
+        </>
+      ) : null}
 
-      {/* Circuit / node mesh */}
       <motion.svg
         className="absolute inset-0 h-full w-full opacity-[0.55]"
         xmlns="http://www.w3.org/2000/svg"
         animate={
-          reduce
-            ? undefined
-            : { x: [0, 12, 0], y: [0, -8, 0], opacity: [0.35, 0.6, 0.35] }
+          animate
+            ? { x: [0, 12, 0], y: [0, -8, 0], opacity: [0.35, 0.6, 0.35] }
+            : undefined
         }
         transition={
-          reduce
-            ? undefined
-            : { duration: 22, repeat: Infinity, ease: "easeInOut" }
+          animate
+            ? { duration: 22, repeat: Infinity, ease: "easeInOut" }
+            : undefined
         }
       >
         <defs>
@@ -89,22 +100,27 @@ export function SiteBackground() {
         <rect width="100%" height="100%" fill="url(#vignette)" />
       </motion.svg>
 
-      {/* Floating geometric accents */}
-      <motion.div
-        className="geo-ring absolute top-[12%] right-[12%] h-40 w-40"
-        animate={reduce ? undefined : { rotate: [0, 360] }}
-        transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="geo-diamond absolute bottom-[18%] left-[8%] h-24 w-24"
-        animate={reduce ? undefined : { rotate: [0, -20, 0], y: [0, -16, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="geo-cross absolute top-[48%] left-[48%] h-16 w-16"
-        animate={reduce ? undefined : { opacity: [0.25, 0.7, 0.25] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
+      {!isMobile ? (
+        <>
+          <motion.div
+            className="geo-ring absolute top-[12%] right-[12%] h-40 w-40"
+            animate={animate ? { rotate: [0, 360] } : undefined}
+            transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="geo-diamond absolute bottom-[18%] left-[8%] h-24 w-24"
+            animate={
+              animate ? { rotate: [0, -20, 0], y: [0, -16, 0] } : undefined
+            }
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="geo-cross absolute top-[48%] left-[48%] h-16 w-16"
+            animate={animate ? { opacity: [0.25, 0.7, 0.25] } : undefined}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </>
+      ) : null}
     </div>
   );
 }

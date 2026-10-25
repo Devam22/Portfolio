@@ -15,7 +15,6 @@ const details = [
     href: `mailto:${profile.email}`,
     Icon: socialIcons.email.Icon,
     color: socialIcons.email.color,
-    external: false,
   },
   {
     key: "phone" as const,
@@ -24,7 +23,6 @@ const details = [
     href: `tel:${profile.phone.replace(/\s+/g, "")}`,
     Icon: socialIcons.phone.Icon,
     color: socialIcons.phone.color,
-    external: false,
   },
   {
     key: "linkedin" as const,
@@ -33,7 +31,6 @@ const details = [
     href: profile.linkedin,
     Icon: socialIcons.linkedin.Icon,
     color: socialIcons.linkedin.color,
-    external: true,
   },
   {
     key: "github" as const,
@@ -42,7 +39,6 @@ const details = [
     href: profile.github,
     Icon: socialIcons.github.Icon,
     color: socialIcons.github.color,
-    external: true,
   },
 ];
 
@@ -81,8 +77,8 @@ export function Contact() {
                   >
                     <a
                       href={item.href}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noreferrer" : undefined}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="contact-row group h-full"
                     >
                       <span
@@ -118,6 +114,8 @@ export function Contact() {
               <a
                 href={profile.resumePath}
                 download={profile.resumeDownloadName}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary"
               >
                 <HiArrowDownTray className="h-4 w-4" />

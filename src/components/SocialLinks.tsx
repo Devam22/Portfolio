@@ -7,22 +7,18 @@ const links = [
   {
     key: "github" as const,
     href: profile.github,
-    external: true,
   },
   {
     key: "linkedin" as const,
     href: profile.linkedin,
-    external: true,
   },
   {
     key: "email" as const,
     href: `mailto:${profile.email}`,
-    external: false,
   },
   {
     key: "phone" as const,
     href: `tel:${profile.phone.replace(/\s+/g, "")}`,
-    external: false,
   },
 ];
 
@@ -42,8 +38,8 @@ export function SocialLinks({
           <a
             key={link.key}
             href={link.href}
-            target={link.external ? "_blank" : undefined}
-            rel={link.external ? "noreferrer" : undefined}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={meta.label}
             className={`social-btn ${size === "sm" ? "!h-9 !w-9" : ""}`}
             onMouseEnter={(event) => {

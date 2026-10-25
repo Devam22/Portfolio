@@ -7,6 +7,7 @@
   "linkedin": "https://www.linkedin.com/in/devam-zanzmera",
   "github": "https://github.com/Devam22",
   "githubUsername": "Devam22",
+  "siteUrl": "https://devamzanzmera.com",
   "resumePath": "/resume.pdf",
   "resumeDownloadName": "Devam_Zanzmera_Resume.pdf",
   "heroBadge": "Toronto, Canada · Open to opportunities",
@@ -20,6 +21,40 @@
   },
   "footerNote": "AI/ML Engineer · Toronto",
   "projectsLimit": 4,
+  "featuredProjects": [
+    {
+      "name": "E-Commerce Support RAG Agent",
+      "repo": null,
+      "description": "RAG customer-support agent that grounds answers in verified policy docs with LangChain, embeddings, and ChromaDB.",
+      "stack": ["LangChain", "ChromaDB", "Hugging Face", "Streamlit"],
+      "url": "https://github.com/Devam22",
+      "homepage": null
+    },
+    {
+      "name": "Multilingual Sentiment Pipeline",
+      "repo": null,
+      "description": "Real-time NLP pipeline for multilingual sentiment analysis using BERT-style models and streaming data.",
+      "stack": ["BERT", "Kafka", "Python", "NLP"],
+      "url": "https://github.com/Devam22",
+      "homepage": null
+    },
+    {
+      "name": "YOLOv8 Vision Tracker",
+      "repo": null,
+      "description": "End-to-end computer vision system for object detection and tracking with YOLOv8.",
+      "stack": ["YOLOv8", "Computer Vision", "Python"],
+      "url": "https://github.com/Devam22",
+      "homepage": null
+    },
+    {
+      "name": "Portfolio",
+      "repo": "Portfolio",
+      "description": "Personal portfolio with theme support, motion, and hourly GitHub project sync.",
+      "stack": ["Next.js", "TypeScript", "Tailwind"],
+      "url": "https://github.com/Devam22/Portfolio",
+      "homepage": null
+    }
+  ],
   "nav": [
     {
       "label": "About",
@@ -50,8 +85,8 @@
     },
     "projects": {
       "eyebrow": "Projects",
-      "title": "Selected work from GitHub.",
-      "description": "Four most recently updated public repositories, synced hourly."
+      "title": "Selected work.",
+      "description": "Featured builds, with live GitHub stats synced hourly when a repo is linked."
     },
     "skills": {
       "eyebrow": "Skills",

@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import type { GitHubRepo } from "@/lib/github";
 import { formatRelativeDate } from "@/lib/github";
+import type { DisplayProject } from "@/lib/projects";
 import { profile } from "@/content/profile";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getLanguageIcon, socialIcons } from "@/lib/icons";
@@ -10,10 +10,10 @@ import { FaGithub, FaStar, FaCodeFork } from "react-icons/fa6";
 import { HiArrowTopRightOnSquare } from "react-icons/hi2";
 
 export function Projects({
-  repos,
+  projects,
   error,
 }: {
-  repos: GitHubRepo[];
+  projects: DisplayProject[];
   error: string | null;
 }) {
   const reduce = useReducedMotion();
@@ -35,7 +35,7 @@ export function Projects({
             style={{ color: socialIcons.github.color }}
           />
           <span className="font-mono truncate text-[10px] font-semibold text-[var(--muted)] sm:text-xs">
-            Top {profile.projectsLimit} · @{profile.githubUsername}
+            Featured · @{profile.githubUsername}
           </span>
         </div>
 
@@ -45,18 +45,18 @@ export function Projects({
           </p>
         ) : null}
 
-        {!error && repos.length === 0 ? (
-          <p className="text-sm text-[var(--muted)]">No public repositories found.</p>
+        {!error && projects.length === 0 ? (
+          <p className="text-sm text-[var(--muted)]">No projects to show yet.</p>
         ) : null}
 
         <ul className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
-          {repos.map((repo, index) => {
-            const lang = getLanguageIcon(repo.language);
+          {projects.map((project, index) => {
+            const lang = getLanguageIcon(project.language);
             const LangIcon = lang.Icon;
 
             return (
               <motion.li
-                key={repo.id}
+                key={project.id}
                 className="min-w-0"
                 initial={reduce ? false : { opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -68,9 +68,9 @@ export function Projects({
                 }}
               >
                 <motion.a
-                  href={repo.html_url}
+                  href={project.url}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="panel group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl p-4 sm:rounded-[1.75rem] sm:p-5 md:p-6"
                 >
                   <div
@@ -88,34 +88,53 @@ export function Projects({
                   <div className="flex min-w-0 items-start gap-2">
                     <FaGithub className="mt-1 h-5 w-5 shrink-0 text-[var(--foreground)]" />
                     <h3 className="font-display min-w-0 break-words text-lg tracking-tight text-[var(--foreground)] group-hover:text-[var(--accent)] sm:text-xl">
-                      {repo.name}
+                      {project.name}
                     </h3>
+                    {project.featured ? (
+                      <span className="font-mono mt-1 shrink-0 rounded-full border border-[var(--border)] px-2 py-0.5 text-[9px] font-semibold tracking-wide text-[var(--accent)] uppercase">
+                        Featured
+                      </span>
+                    ) : null}
                     <HiArrowTopRightOnSquare className="mt-1.5 hidden h-4 w-4 shrink-0 text-[var(--muted)] opacity-0 transition group-hover:opacity-100 sm:block" />
                   </div>
 
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">
-                    {repo.description ?? "No description provided."}
+                    {project.description}
                   </p>
 
                   <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
-                    <span className="chip">
-                      <LangIcon
-                        className="h-3.5 w-3.5"
-                        style={{ color: lang.color }}
-                      />
-                      {repo.language ?? "Other"}
-                    </span>
-                    <span className="chip">
-                      <FaStar className="h-3.5 w-3.5 text-[#F59E0B]" />
-                      {repo.stargazers_count}
-                    </span>
-                    <span className="chip">
-                      <FaCodeFork className="h-3.5 w-3.5 text-[var(--accent)]" />
-                      {repo.forks_count}
-                    </span>
-                    <span className="font-mono text-[10px] text-[var(--muted)] sm:text-xs">
-                      {formatRelativeDate(repo.updated_at)}
-                    </span>
+                    {project.stack.length > 0
+                      ? project.stack.slice(0, 4).map((item) => (
+                          <span key={item} className="chip">
+                            {item}
+                          </span>
+                        ))
+                      : (
+                          <span className="chip">
+                            <LangIcon
+                              className="h-3.5 w-3.5"
+                              style={{ color: lang.color }}
+                            />
+                            {project.language ?? "Other"}
+                          </span>
+                        )}
+                    {project.stargazers_count > 0 ? (
+                      <span className="chip">
+                        <FaStar className="h-3.5 w-3.5 text-[#F59E0B]" />
+                        {project.stargazers_count}
+                      </span>
+                    ) : null}
+                    {project.forks_count > 0 ? (
+                      <span className="chip">
+                        <FaCodeFork className="h-3.5 w-3.5 text-[var(--accent)]" />
+                        {project.forks_count}
+                      </span>
+                    ) : null}
+                    {project.updated_at ? (
+                      <span className="font-mono text-[10px] text-[var(--muted)] sm:text-xs">
+                        {formatRelativeDate(project.updated_at)}
+                      </span>
+                    ) : null}
                   </div>
                 </motion.a>
               </motion.li>

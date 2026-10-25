@@ -7,19 +7,19 @@ import { Skills } from "@/components/Skills";
 import { Education } from "@/components/Education";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
-import { fetchAllRepos } from "@/lib/github";
+import { getDisplayProjects } from "@/lib/projects";
 
 export default async function Home() {
-  const { repos, error } = await fetchAllRepos();
+  const { projects, error } = await getDisplayProjects();
 
   return (
     <>
       <Nav />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Hero />
         <About />
         <Experience />
-        <Projects repos={repos} error={error} />
+        <Projects projects={projects} error={error} />
         <Skills />
         <Education />
         <Contact />

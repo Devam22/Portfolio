@@ -33,7 +33,6 @@ export async function fetchAllRepos(): Promise<GitHubFetchResult> {
   }
 
   const username = profile.githubUsername;
-  const limit = profile.projectsLimit ?? 4;
 
   try {
     const response = await fetch(
@@ -69,8 +68,7 @@ export async function fetchAllRepos(): Promise<GitHubFetchResult> {
         fork: repo.fork,
         archived: repo.archived,
         homepage: repo.homepage,
-      }))
-      .slice(0, limit);
+      }));
 
     return { repos, error: null };
   } catch {
